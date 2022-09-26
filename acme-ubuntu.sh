@@ -13,13 +13,13 @@ echo "Download and Install"
 git clone https://github.com/dehydrated-io/dehydrated
 mkdir -p /etc/dehydrated/hooks /etc/dehydrated/domains.d /etc/pki/acme /var/www/dehydrated
 cp dehydrated/dehydrated /sbin
-if [ -f /etc/dehydrated/config ] && [ -f /etc/dehydrated/domains.txt) ]; then
+if [ -f /etc/dehydrated/config ] && [ -f /etc/dehydrated/domains.txt ]; then
 	echo "Running config detected, skip config copy."
 else
 	cp dehydrated/docs/examples/{config,domains.txt} /etc/dehydrated
 fi
 
-wget https://raw.githubusercontent.com/socram8888/dehydrated-hook-cloudflare/master/cf-hook.sh -O /etc/dehydrated/hooks/cloudflare.sh 2>&1 >/dev/null
+curl -s https://raw.githubusercontent.com/socram8888/dehydrated-hook-cloudflare/master/cf-hook.sh --output /etc/dehydrated/hooks/cloudflare.sh
 chmod +x /etc/dehydrated/hooks/cloudflare.sh 2>&1 >/dev/null
 
 sed -i 's|#CERTDIR="${BASEDIR}/certs"|CERTDIR=/etc/pki/acme|' /etc/dehydrated/config 2>&1 >/dev/null
