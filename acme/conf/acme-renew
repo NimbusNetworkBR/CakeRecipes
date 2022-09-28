@@ -1,0 +1,8 @@
+#!/bin/bash
+echo $(date) >> /var/log/acme.log
+dehydrated -g -c >> /var/log/acme.log
+if [ "$(nginx -t 2>&1 | tail -1)" == "nginx: configuration file /etc/nginx/nginx.conf test is successful" ]; then
+        echo  "Nginx Syntax ok: reload configuration." >> /var/log/acme.log
+        nginx -s reload
+fi
+echo "---" >> /var/log/acme.log
