@@ -20,3 +20,9 @@ include snippets/acme.conf;
 ```
 
 * Caso precise validar o certificado por DNS (no caso de usar um certificado wildcard, por exemplo),
+
+* Depois de configurar o virtual host no nginx e adicionar o dominio no domains.txt, só executar:
+
+```
+dehydrated -c
+```
