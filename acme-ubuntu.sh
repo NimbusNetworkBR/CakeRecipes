@@ -35,7 +35,7 @@ curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme/
 echo "### Register Server"
 dehydrated --register --accept-terms
 
-echo "###Clean Temp Files"
+echo "### Clean Temp Files"
 if [ -d $TEMPDIR ];then
 	cd $ORIGDIR
 	rm -rf $TEMPDIR;
