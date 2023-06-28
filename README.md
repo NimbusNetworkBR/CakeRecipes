@@ -5,7 +5,7 @@
 ## Dehydrated - Instalador
 ### Instalar o Dehydrated
 ```
-curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme-ubuntu.sh | bash
+curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme-install.sh | bash
 ```
 
 ### Os dominios são adicionados aqui, um por linha. Se ele houver mais de um hostname, só adicionar separado por espaço.
@@ -16,7 +16,11 @@ curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme-
 * Precisa adicionar esse include no nginx, em todos os virtual hosts.
 * Pra evitar problemas com a renovação, o redirect pra https:// precisa estar dentro do "location / {}"
 ```
+#Ubuntu
 include snippets/acme.conf;
+
+#EL
+include custom.d/acme.conf;
 ```
 
 * Caso precise validar o certificado por DNS (no caso de usar um certificado wildcard, por exemplo), precisa configurar na pasta de customização (/etc/dehydrated/domains.d) um arquivo com o nome principal do certificado, com as variáveis de ambiente do hook.
