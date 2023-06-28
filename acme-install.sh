@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 #Ubuntu 20, 22 LTS - Dehydrated Let's Encrypt Client Configuration
+#EL 8, 9 -Dehydrated Let's Encrypt Client Configuration
 
 echo "### Install dependency packages"
 apt-get -qq update; apt-get -qq -y install git curl publicsuffix jq bind9-utils
