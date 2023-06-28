@@ -1,9 +1,17 @@
 #!/usr/bin/bash
 #Ubuntu 20, 22 LTS - Dehydrated Let's Encrypt Client Configuration
-#EL 8, 9 -Dehydrated Let's Encrypt Client Configuration
+#EL 8, 9 - Dehydrated Let's Encrypt Client Configuration
 
 echo "### Install dependency packages"
-apt-get -qq update; apt-get -qq -y install git curl publicsuffix jq bind9-utils
+source /etc/os-release
+if [ $PLATFORM_ID == "platform:el8" ] || [ $PLATFORM_ID == "platform:el9" ]; then
+	NGINX_CUSTOM="custom.d"
+	dnf -y install git publicsuffix-list publicsuffix-list-dafsa jq wget bind-utils
+else
+	SYSTEM_VERSION="DB"
+	NGINX_CUSTOM="snippets"
+	apt-get -qq update; apt-get -qq -y install git curl publicsuffix jq bind9-utils
+fi
 
 ORIGDIR=$(pwd)
 TEMPDIR=$(mktemp -d)
@@ -12,7 +20,7 @@ cd $TEMPDIR
 
 echo "### Download and Install"
 git clone https://github.com/dehydrated-io/dehydrated -q
-mkdir -p /etc/dehydrated/hooks /etc/dehydrated/domains.d /etc/pki/acme /var/www/dehydrated /etc/nginx/snippets
+mkdir -p /etc/dehydrated/hooks /etc/dehydrated/domains.d /etc/pki/acme /var/www/dehydrated /etc/nginx/$NGINX_CUSTOM
 cp dehydrated/dehydrated /sbin
 if [ -f /etc/dehydrated/config ] && [ -f /etc/dehydrated/domains.txt ]; then
 	echo "Running config detected, skip config copy."
@@ -31,7 +39,7 @@ curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme/
 chmod +x /etc/cron.daily/acme-renew
 
 echo "### Install ACME Nginx snippet"
-curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme/conf/acme-nginx.conf --output /etc/nginx/snippets/acme.conf
+curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme/conf/acme-nginx.conf --output /etc/nginx/$NGINX_CUSTOM/acme.conf
 
 echo "### Register Server"
 dehydrated --register --accept-terms
