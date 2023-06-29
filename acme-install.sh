@@ -7,7 +7,7 @@ source /etc/os-release
 if [ "$PLATFORM_ID" = "platform:el8" ] || [ "$PLATFORM_ID" = "platform:el9" ]; then
 	NGINX_CUSTOM="custom.d"
 	dnf -y install git publicsuffix-list publicsuffix-list-dafsa jq wget bind-utils
-elif [ "VERSION_ID" = "20.04" ] || [ "VERSION_ID" = "22.04" ]; then
+elif [ "$VERSION_ID" = "20.04" ] || [ "$VERSION_ID" = "22.04" ]; then
 	NGINX_CUSTOM="snippets"
 	apt-get -qq update; apt-get -qq -y install git curl publicsuffix jq bind9-utils
 else
