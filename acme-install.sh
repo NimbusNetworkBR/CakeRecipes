@@ -45,7 +45,7 @@ echo "### Install ACME Nginx snippet"
 curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme/conf/acme-nginx.conf --output /etc/nginx/$NGINX_CUSTOM/acme.conf
 
 echo "### Register Server"
-#dehydrated --register --accept-terms
+dehydrated --register --accept-terms
 
 echo "### Clean Temp Files"
 if [ -d $TEMPDIR ];then
