@@ -6,10 +6,10 @@ echo "### Install dependency packages"
 source /etc/os-release
 if [ "$PLATFORM_ID" = "platform:el8" ] || [ "$PLATFORM_ID" = "platform:el9" ]; then
 	NGINX_CUSTOM="custom.d"
-	dnf -y install git publicsuffix-list publicsuffix-list-dafsa jq wget bind-utils diffutils
+	dnf -q -y install git publicsuffix-list publicsuffix-list-dafsa jq wget bind-utils diffutils
 elif [ "$VERSION_ID" = "20.04" ] || [ "$VERSION_ID" = "22.04" ]; then
 	NGINX_CUSTOM="snippets"
-	apt-get -qq update; apt-get -qq -y install bsdmainutils dialog
+	apt-get -qq update; apt-get -qq -y install bsdmainutils dialog cron
 	apt-get -qq -y install git wget curl publicsuffix jq bind9-utils
 else
 	echo "Unknown system version"
@@ -45,7 +45,7 @@ echo "### Install ACME Nginx snippet"
 curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme/conf/acme-nginx.conf --output /etc/nginx/$NGINX_CUSTOM/acme.conf
 
 echo "### Register Server"
-dehydrated --register --accept-terms
+#dehydrated --register --accept-terms
 
 echo "### Clean Temp Files"
 if [ -d $TEMPDIR ];then
