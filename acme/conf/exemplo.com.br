@@ -1,0 +1,2 @@
+HOOK=/etc/dehydrated/hooks/cloudflare.sh
+CHALLENGETYPE=dns-01
