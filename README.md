@@ -8,7 +8,7 @@
 curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme-install.sh | bash
 ```
 
-### Os dominios são adicionados aqui, um por linha. Se ele houver mais de um hostname, só adicionar separado por espaço.
+### Os dominios são adicionados aqui, um por linha. Se houver mais de um hostname, só adicionar separado por espaço.
 ```
 /etc/dehydrated/domains.txt
 ```

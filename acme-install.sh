@@ -37,6 +37,9 @@ echo "### Install Cloud Flare Hook"
 curl -s https://raw.githubusercontent.com/socram8888/dehydrated-hook-cloudflare/master/cf-hook.sh --output /etc/dehydrated/hooks/cloudflare.sh
 chmod +x /etc/dehydrated/hooks/cloudflare.sh
 
+echo "### Install CF domain example.
+curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme/conf/exemplo.com.br --output /etc/dehydrated/domains.d/exemplo.com.br
+
 echo "### Install cron script"
 curl -s https://raw.githubusercontent.com/NimbusNetworkBR/CakeRecipes/prod/acme/conf/acme-renew --output /etc/cron.daily/acme-renew
 chmod +x /etc/cron.daily/acme-renew
